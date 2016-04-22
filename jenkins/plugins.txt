@@ -1,0 +1,5 @@
+artifactory:2.4.7
+scm-api:0.2
+git:2.4.0
+git-client:1.19.6
+sonar:2.4

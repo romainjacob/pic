@@ -1,0 +1,38 @@
+version: '2'
+services:
+  jenkins:
+     container_name: jenkins
+     build: ./jenkins
+     ports:
+       - "8080:8080"
+       - "50000:50000"
+     depends_on:
+       - artifactory
+       - sonar
+       - gitlab
+  artifactory:
+    container_name: artifactory
+    build: ./artifactory
+    ports:
+      - "8081:8081"
+  db_sonar:
+    container_name: db_sonar
+    image: postgres:9.1
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+  sonar:
+    container_name: sonar
+    image: sonarqube:5.4
+    ports:
+      - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db_sonar:5432/sonar
+    depends_on:
+      - db_sonar
+  gitlab:
+    container_name: gitlab
+    image: gitlab/gitlab-ce:8.6.6-ce.0
+    ports:
+      - "9090:80"
+      - "2224:22"
