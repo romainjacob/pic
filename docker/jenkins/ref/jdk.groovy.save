@@ -1,0 +1,11 @@
+import jenkins.model.*
+import hudson.model.*
+import hudson.tools.*
+
+def inst = Jenkins.getInstance()
+
+def desc = inst.getDescriptor("hudson.model.JDK")
+
+def version = [
+	"jdk8": "/usr/
+]

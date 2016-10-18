@@ -1,9 +1,12 @@
-FROM jenkins:1.642.4
+FROM jenkins:2.19.1
 MAINTAINER Matthieu Jaulin "mjaulin@sii.fr"
 
-COPY plugins.txt /var/jenkins_home/plugins.txt
-RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
+RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
-COPY config/* /usr/share/jenkins/ref/
-COPY users /usr/share/jenkins/ref/users
+COPY ref/init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
+COPY ref/basic-security.groovy /usr/share/jenkins/ref/init.groovy.d/
+COPY ref/executors.groovy /usr/share/jenkins/ref/init.groovy.d/
 
+RUN echo 2.19.1 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator docker-plugin maven git artifactory sonar 
