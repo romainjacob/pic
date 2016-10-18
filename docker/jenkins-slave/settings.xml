@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+	<localRepository>/home/jenkins/.m2/repositry</localRepository>
+
+	<servers>
+		<server>
+			<id>artifactory</id>
+			<username>jenkins</username>
+			<password>jenkins</password>
+		</server>
+	</servers>
+
+	<mirrors>
+		<mirror>
+			<id>artifactory</id>
+			<mirrorOf>*</mirrorOf>
+			<url>http://artifactory:8081/artifactory/libs-snapshot</url>
+		</mirror>
+	</mirrors>
+	
+	<profiles>
+		<profile>
+			<id>allow-snaphots</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>snapshots-repo</id>
+					<url>http://artifactory:8081/artifactory/libs-snapshot</url>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+</settings>
