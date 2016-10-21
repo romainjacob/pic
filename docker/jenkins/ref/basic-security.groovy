@@ -2,7 +2,7 @@
 import jenkins.model.*
 import hudson.security.*
 
-def instance = Jenkins.getInstance()
+def instance = Jenkins.instance
 
 println "--> creating local user 'admin'"
 
