@@ -4,7 +4,7 @@ MAINTAINER Matthieu Jaulin "mjaulin@sii.fr"
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 RUN mkdir -p /usr/share/jenkins/ref/secrets
 
-RUN /usr/local/bin/install-plugins.sh workflow-aggregator docker-plugin maven-plugin git junit artifactory sonar pipeline-utility-steps
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator docker-plugin maven-plugin junit git artifactory sonar pipeline-utility-steps
 
 COPY ref/* /usr/share/jenkins/ref/init.groovy.d/
 
