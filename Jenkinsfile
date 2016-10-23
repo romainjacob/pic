@@ -19,16 +19,13 @@ node {
         buildInfo = Artifactory.newBuildInfo()
 
         artifactoryMaven.run pom: 'demo/pom.xml', goals: 'clean install', buildInfo: buildInfo
+        artifactory.publishBuildInfo buildInfo
 
         junit 'demo/target/surefire-reports/*.xml'
     }
 
     stage('Sonar') {
-      def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
       sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonar:9000/"
-    }
-
-    stage('Publish') {
-        artifactory.publishBuildInfo buildInfo
     }
 }
