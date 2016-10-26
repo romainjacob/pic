@@ -44,7 +44,7 @@ dockerTemplate.setLauncher(dockerComputerSSHLauncher)
 templates.add(dockerTemplate)
 
 def dockerClouds = [
-  new DockerCloud("docker-agent", templates, "tcp://172.17.0.1:4243", 100, 15, 15, "jenkins", null)
+  new DockerCloud("docker-agent", templates, "tcp://172.18.0.1:4243", 100, 15, 15, "jenkins", null)
 ]
 
 instance.clouds.addAll(dockerClouds)
