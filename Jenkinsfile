@@ -73,7 +73,7 @@ node ("docker-agent") {
         },
         "stream 2": {
             stage('Deploy image') {
-                sh 'docker run -d --name demo -p 9898:8080 demo:${pom.version}'
+                sh "docker run -d --name demo -p 9898:8080 demo:${pom.version}"
             }
         }
     )
