@@ -1,0 +1,15 @@
+node ('docker-agent') {
+    stage('Build') {
+        git url : 'https://github.com/mjaulin/pic.git', branch : '${branch}'
+        dir("demo") {
+            // Run the maven build
+            sh "'mvn' clean install"
+            junit 'target/surefire-reports/*.xml'
+        }
+    }
+    stage('Deploy') {
+        sh 'mv demo/target/demo*.jar demo/demo.jar'
+        sh 'docker build -t demo-${branch} demo/'
+        sh 'docker run -p ${port}:8080 -d --name demo-${branch} demo-${branch}'
+    }
+}

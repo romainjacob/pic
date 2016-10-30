@@ -2,12 +2,9 @@ def pom
 node {
     stage('Build') {
 
-        git 'https://github.com/mjaulin/pic.git'
+        git url : 'https://github.com/mjaulin/pic.git', branch : 'master'
 
         pom = readMavenPom file: 'demo/pom.xml'
-        echo "${pom.version}"
-        echo "${pom.name}"
-
 
         def artifactory = Artifactory.server('artifactory')
         def artifactoryMaven = Artifactory.newMavenBuild()
@@ -37,10 +34,10 @@ parallel (
             stage('Build image') {
                 git 'https://github.com/mjaulin/pic.git'
         	    sh "mvn -Dartifact=fr.sii.pic:demo:${pom.version} -DoutputDirectory=demo dependency:copy"
-        	    sh "docker build -t demo:${pom.version} demo/"
+        	    sh "docker build -t localhost:5000/demo:${pom.version} demo/"
             }
             stage('Run image') {
-                sh "docker run -d --name build-demo --net docker_default demo:${pom.version}"
+                sh "docker run -d --name build-demo --net docker_default localhost:5000/demo:${pom.version}"
             }
         }
     }
@@ -72,9 +69,12 @@ node ("docker-agent") {
 			}
         },
         "stream 2": {
-            stage('Deploy image') {
-                sh "docker run -d --name demo -p 9898:8080 demo:${pom.version}"
-            }
+            stage('Publish image') {
+				sh "docker push localhost:5000/demo:${pom.version}"            
+			}
         }
     )
+	stage('Deploy image') [
+        sh "docker run -d --name demo -p 9898:8080 demo:${pom.version}"
+	}
 }
