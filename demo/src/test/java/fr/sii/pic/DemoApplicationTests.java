@@ -29,4 +29,10 @@ public class DemoApplicationTests {
 				.andExpect(content().string(equalTo("Hello World!")));
 	}
 
+	@Test
+	public void getDemo() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/demo").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string(equalTo("Bim!")));
+	}
 }

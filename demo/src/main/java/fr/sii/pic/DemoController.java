@@ -13,4 +13,9 @@ public class DemoController {
     public String index() {
         return "Hello World!";
     }
+    
+    @RequestMapping("/demo")
+    public String demo() {
+        return "Bim!";
+    }
 }
