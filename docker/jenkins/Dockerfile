@@ -1,5 +1,5 @@
 FROM jenkins:2.19.1
-MAINTAINER Matthieu Jaulin "mjaulin@sii.fr"
+MAINTAINER Matthieu Jaulin "xxx@gmail.com"
 
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 RUN mkdir -p /usr/share/jenkins/ref/secrets
