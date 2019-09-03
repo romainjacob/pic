@@ -34,10 +34,10 @@ parallel (
             stage('Build image') {
                 git 'https://github.com/mjaulin/pic.git'
         	    sh "mvn -Dartifact=fr.sii.pic:demo:${pom.version} -DoutputDirectory=demo dependency:copy"
-        	    sh "docker build -t docker.registry.sii.fr:5000/demo:${pom.version} demo/"
+        	    sh "docker build -t docker.registry:5000/demo:${pom.version} demo/"
             }
             stage('Run image') {
-                sh "docker run -d --name build-demo --net docker_default docker.registry.sii.fr:5000/demo:${pom.version}"
+                sh "docker run -d --name build-demo --net docker_default docker.registry:5000/demo:${pom.version}"
             }
         }
     }
@@ -70,11 +70,11 @@ node ("docker-agent") {
         },
         "stream 2": {
             stage('Publish image') {
-				sh "docker push docker.registry.sii.fr:5000/demo:${pom.version}"
+				sh "docker push docker.registry:5000/demo:${pom.version}"
 			}
         }
     )
     stage('Deploy image') {
-        sh "docker run -d --name demo -p 9898:8080 docker.registry.sii.fr:5000/demo:${pom.version}"
+        sh "docker run -d --name demo -p 9898:8080 docker.registry:5000/demo:${pom.version}"
     }
 }
