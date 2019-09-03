@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Matthieu Jaulin "mjaulin@sii.fr"
+MAINTAINER Matthieu Jaulin "xxx@gmail.com"
 
 ENV MAVEN_VERSION 3.3.9
 
