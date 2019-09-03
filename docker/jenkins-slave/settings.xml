@@ -7,7 +7,7 @@
 		<server>
 			<id>artifactory</id>
 			<username>jenkins</username>
-			<password>jenkins</password>
+			<password>xxx</password>
 		</server>
 	</servers>
 
