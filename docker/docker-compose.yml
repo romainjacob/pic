@@ -21,7 +21,7 @@ services:
     image: postgres:9.1
     environment:
       - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_PASSWORD=xxx
   sonar:
     container_name: sonar
     image: sonarqube:5.4
