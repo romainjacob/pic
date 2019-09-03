@@ -1,5 +1,5 @@
 FROM java:8-jdk-alpine
-MAINTAINER Matthieu Jaulin "mjaulin@sii.fr"
+MAINTAINER Matthieu Jaulin "xxx@gmail.com"
 
 RUN mkdir /root/demo
 COPY demo*.jar /root/demo/demo.jar
