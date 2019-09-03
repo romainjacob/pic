@@ -3,9 +3,9 @@
   <users>
     <user>
       <username>jenkins</username>
-      <password>f67e9e34411538e22b74f26ef04a0e44</password>
+      <password>xxxxxx</password>
       <salt>CAFEBABEEBABEFAC</salt>
-      <email>support-nantes@sii.fr</email>
+      <email>xxx@gmail.com</email>
       <admin>false</admin>
       <enabled>true</enabled>
       <updatableProfile>flase</updatableProfile>
